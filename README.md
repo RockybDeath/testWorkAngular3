@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.3.
 
+## First steps
+
+Please run `npm install` for install packages.
+
 ## Backend Server
 
 Run `npm run server` for a dev server. Navigate to `http://localhost:3000/`.
