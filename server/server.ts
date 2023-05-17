@@ -25,6 +25,12 @@ server.put('/update', (req: any, res: any) => {
   res.send('All ok');
 });
 
+server.post('/delete', (req: any, res: any) => {
+  deleteDocument(req.body);
+
+  res.send('All ok');
+});
+
 server.use(router);
 server.listen(3000, () => {
   console.log('JSON Server is running');
@@ -56,5 +62,12 @@ function refreshJsonDocuments(documents: any) {
 function addDocument(document: any): void {
   const documents = readDocuments();
   documents.push(document);
+  refreshJsonDocuments(documents);
+}
+
+function deleteDocument(document: any): void {
+  let documents = readDocuments();
+  // @ts-ignore
+  documents = documents.filter((doc) => doc.id !== document.id);
   refreshJsonDocuments(documents);
 }
