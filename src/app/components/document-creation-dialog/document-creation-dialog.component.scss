@@ -1,0 +1,58 @@
+:host{
+  width: 55vw;
+  height: auto;
+  overflow-y: hidden;
+  display: block;
+}
+mat-icon{
+  cursor: pointer;
+}
+.header{
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 10px;
+  height: 40px;
+  &__text{
+    flex: 1 0 0;
+  }
+}
+.info{
+  display: flex;
+  padding: 0 20px;
+  &__main-parameters{
+    width: 70%;
+    margin-right: 15px;
+    gap: 10px;
+  }
+  &__secondary-parameters{
+    width: 30%;
+    flex-flow: column;
+    padding: 0;
+  }
+  &__part-of-parameters{
+    justify-content: space-between;
+    padding: 0;
+  }
+}
+.footer{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 10px;
+  margin-bottom: 20px;
+  &__start-button{
+    flex: 1 0 0
+  }
+}
+button.gray{
+  color: black;
+  background-color: #dcd8d8;
+}
+.form-field{
+  width: 100%;
+}

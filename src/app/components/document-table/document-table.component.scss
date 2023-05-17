@@ -1,0 +1,15 @@
+tr.archive{
+  background-color: #97f39f;
+}
+tr.selected{
+  background-color: #c9c9e8 !important;
+}
+td.main-document{
+  width: 10px;
+}
+tr{
+  cursor: pointer;
+}
+tr:hover{
+  background-color: #dcd8d8 !important;
+}

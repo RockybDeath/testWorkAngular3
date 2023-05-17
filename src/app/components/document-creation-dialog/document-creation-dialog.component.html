@@ -1,0 +1,84 @@
+<div class="header">
+  <div class="header__text">Документ</div>
+  <mat-icon (click)="close()">close</mat-icon>
+</div>
+<div class="info" [formGroup]="form">
+  <div class="info__main-parameters">
+    <mat-checkbox [color]="'accent'" formControlName="isMain"
+      >Основной документ, удостоверяющий личность</mat-checkbox
+    >
+    <div class="info info__part-of-parameters">
+      <mat-form-field [appearance]="'outline'">
+        <mat-label>Вид документа:</mat-label>
+        <mat-select
+          [formControlName]="'documentType'"
+          [compareWith]="compareDocumentType"
+        >
+          <mat-option *ngFor="let type of documentTypes | async" [value]="type">
+            {{ type.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field [appearance]="'outline'">
+        <mat-label>Серия:</mat-label>
+        <input matInput [formControlName]="'series'" />
+      </mat-form-field>
+      <mat-form-field [appearance]="'outline'">
+        <mat-label>Номер:</mat-label>
+        <input matInput [formControlName]="'number'" />
+      </mat-form-field>
+    </div>
+    <mat-form-field class="form-field" [appearance]="'outline'">
+      <mat-label>Организация, выдавшая документ:</mat-label>
+      <mat-select [formControlName]="'organization'">
+        <mat-option
+          *ngFor="let organization of organizations | async"
+          [value]="organization"
+        >
+          {{ organization.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="info info__secondary-parameters">
+    <mat-checkbox [color]="'accent'" formControlName="isArchive"
+      >Архивный документ</mat-checkbox
+    >
+    <mat-form-field [appearance]="'outline'">
+      <input
+        matInput
+        [matDatepicker]="datepicker"
+        [formControlName]="'dateOfIssue'"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="datepicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #datepicker>
+        <mat-datepicker-actions>
+          <button mat-button matDatepickerCancel>Cancel</button>
+          <button mat-raised-button color="primary" matDatepickerApply>
+            Apply
+          </button>
+        </mat-datepicker-actions>
+      </mat-datepicker>
+    </mat-form-field>
+    <mat-form-field [appearance]="'outline'">
+      <mat-label>Код подразделения:</mat-label>
+      <input
+        matInput
+        [textMask]="{ mask: mask }"
+        [formControlName]="'divisionCode'"
+      />
+    </mat-form-field>
+  </div>
+</div>
+<div class="footer">
+  <div class="footer__start-button">
+    <button mat-raised-button [color]="'primary'" (click)="save()">
+      Сохранить
+    </button>
+  </div>
+  <button mat-raised-button class="gray" (click)="close()">Выход</button>
+</div>

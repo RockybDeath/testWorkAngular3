@@ -1,0 +1,27 @@
+:host{
+  width: 60%;
+  display: block;
+  margin: 0 auto;
+}
+.header{
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+.table-actions{
+  width: 100%;
+  display: flex;
+  &__buttons{
+    gap: 10px;
+    justify-content: flex-start;
+  }
+  &__checkboxes{
+    justify-content: flex-end;
+  }
+}
+button.accent{
+  background-color: rgb(253, 166, 38);
+}

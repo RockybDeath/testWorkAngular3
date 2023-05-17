@@ -1,0 +1,59 @@
+<div class="header" [formGroup]="searchForm">
+  <mat-form-field [appearance]="'outline'">
+    <mat-label>Вид документа:</mat-label>
+    <mat-select [formControlName]="'documentType'">
+      <mat-option *ngFor="let type of documentTypes | async" [value]="type">
+        {{ type.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field [appearance]="'outline'">
+    <mat-label>Номер:</mat-label>
+    <input matInput [formControlName]="'number'" />
+  </mat-form-field>
+  <button mat-raised-button [color]="'primary'" (click)="search()">
+    Найти
+  </button>
+  <button mat-raised-button [color]="'warn'" (click)="clear()">Очистить</button>
+</div>
+<div class="table-actions">
+  <div class="table-actions table-actions__buttons">
+    <button
+      mat-raised-button
+      class="accent"
+      (click)="changeDocument(ModesEnum.CREATE)"
+    >
+      Добавить<mat-icon>add</mat-icon>
+    </button>
+    <button
+      mat-raised-button
+      (click)="changeDocument(ModesEnum.EDIT)"
+      [disabled]="disableButtons"
+      [color]="'primary'"
+    >
+      Редактировать<mat-icon>edit</mat-icon>
+    </button>
+    <button
+      mat-raised-button
+      (click)="changeDocument(ModesEnum.DELETE)"
+      [disabled]="disableButtons"
+      [color]="'warn'"
+    >
+      Удалить<mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  <div class="table-actions table-actions__checkboxes">
+    <mat-checkbox
+      [color]="'accent'"
+      [(ngModel)]="showArchive"
+      (ngModelChange)="changeArchiveVisibility()"
+      >Показать архивные</mat-checkbox
+    >
+  </div>
+</div>
+<div>
+  <app-document-table
+    [dataSource]="documents"
+    (selectedDocument)="selectDocument($event)"
+  ></app-document-table>
+</div>
