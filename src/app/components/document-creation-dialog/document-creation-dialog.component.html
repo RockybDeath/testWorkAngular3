@@ -50,16 +50,15 @@
         [matDatepicker]="datepicker"
         [formControlName]="'dateOfIssue'"
       />
-      <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle
         matIconSuffix
         [for]="datepicker"
       ></mat-datepicker-toggle>
       <mat-datepicker #datepicker>
         <mat-datepicker-actions>
-          <button mat-button matDatepickerCancel>Cancel</button>
+          <button mat-button matDatepickerCancel>Отмена</button>
           <button mat-raised-button color="primary" matDatepickerApply>
-            Apply
+            Применить
           </button>
         </mat-datepicker-actions>
       </mat-datepicker>
