@@ -32,6 +32,7 @@ export class DocumentCreationDialogComponent implements OnInit {
 
   private createForm(): void {
     this.form = new FormGroup({
+      id: new FormControl<number | null>(null),
       documentType: new FormControl<DocumentType | null>(
         null,
         Validators.required

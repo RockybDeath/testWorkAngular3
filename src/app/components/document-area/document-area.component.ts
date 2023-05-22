@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DocumentService } from '../../services/document.service';
 import { Document } from '../../api/models/document';
 import { Observable, takeUntil } from 'rxjs';
@@ -14,7 +14,6 @@ import { DocumentCreationDialogComponent } from '../document-creation-dialog/doc
   selector: 'app-document-area',
   templateUrl: './document-area.component.html',
   styleUrls: ['./document-area.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentAreaComponent implements OnInit {
   private originalDocuments: Document[] = [];
@@ -84,7 +83,7 @@ export class DocumentAreaComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((documents) => {
         this.originalDocuments = documents;
-        this.setDocumentsWithinArchive(this.originalDocuments);
+        this.search();
       });
   }
 
@@ -132,12 +131,10 @@ export class DocumentAreaComponent implements OnInit {
           .pipe(takeUntil(this.destroy$))
           .subscribe((data) => {
             if (data) {
-              this.originalDocuments.push(data as Document);
-              this.search();
               this.documentService
                 .createDocument(data as Document)
                 .pipe(takeUntil(this.destroy$))
-                .subscribe();
+                .subscribe(() => this.loadDocuments());
             }
           });
         break;
@@ -157,26 +154,18 @@ export class DocumentAreaComponent implements OnInit {
           .pipe(takeUntil(this.destroy$))
           .subscribe((data) => {
             if (data) {
-              this.originalDocuments
-                .filter((doc) => doc.id !== (data as Document).id)
-                .push(data as Document);
-              this.search();
               this.documentService
                 .updateDocument(data as Document)
                 .pipe(takeUntil(this.destroy$))
-                .subscribe();
+                .subscribe(() => this.loadDocuments());
             }
           });
         break;
       case ModesEnum.DELETE:
-        this.originalDocuments = this.originalDocuments.filter(
-          (doc) => doc.id !== this.selectedDocument?.id
-        );
-        this.search();
         this.documentService
           .deleteDocument(this.selectedDocument as Document)
           .pipe(takeUntil(this.destroy$))
-          .subscribe();
+          .subscribe(() => this.loadDocuments());
     }
   }
 }

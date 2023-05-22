@@ -17,7 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { DocumentCreationDialogComponent } from './components/document-creation-dialog/document-creation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { TextMaskModule } from 'angular2-text-mask';
 @NgModule({
   declarations: [
@@ -44,7 +44,10 @@ import { TextMaskModule } from 'angular2-text-mask';
     MatNativeDateModule,
     TextMaskModule,
   ],
-  providers: [MatDatepickerModule],
+  providers: [
+    MatDatepickerModule,
+    { provide: MAT_DATE_LOCALE, useValue: 'ru-GB' },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
